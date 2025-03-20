@@ -12,90 +12,91 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Card de saul 1222'),
-          centerTitle: true, // Centrar el título
-          backgroundColor: Colors.blueGrey, // Color de fondo del AppBar
+          centerTitle: true,
+          backgroundColor: Colors.deepPurple, // Color de fondo del AppBar
           foregroundColor:
               Colors.white, // Color del texto y los íconos del AppBar
+          toolbarHeight: 80.0, // Altura del AppBar
         ),
         body: Center(
-          child: MyCard(),
+          child: EmployeeCard(
+            nombre: 'Saul Perez',
+            edad: 30,
+            idEmpleado: 'EMP-1222',
+          ),
         ),
       ),
     );
   }
 }
 
-class MyCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5.0, // Sombra
-      color: Color(0xf6c5881e), // Color de fondo del Card (naranja oscuro)
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0), // Bordes redondeados
-      ), // Aquí se cerró el paréntesis que faltaba
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize:
-              MainAxisSize.min, // Ajusta el tamaño de la columna al contenido
-          children: [
-            PropertyWidget(
-                icon: Icons.home_filled,
-                label: 'Inicio',
-                color: Colors.white), // Ícono blanco
-            PropertyWidget(
-                icon: Icons.favorite,
-                label: 'Favorito',
-                color: Colors.yellowAccent), // Ícono amarillo
-            PropertyWidget(
-                icon: Icons.thumb_up,
-                label: 'Like',
-                color: Colors.lightBlueAccent), // Ícono azul claro
-            PropertyWidget(
-                icon: Icons.bluetooth,
-                label: 'Bluetooth',
-                color: Colors.lightGreenAccent), // Ícono verde claro
-            PropertyWidget(
-                icon: Icons.share,
-                label: 'Compartir',
-                color: Color(0xff281c20)), // Ícono rosa
-          ],
-        ),
-      ),
-    ); // Se eliminó el punto y coma extra
-  }
-}
+class EmployeeCard extends StatelessWidget {
+  final String nombre;
+  final int edad;
+  final String idEmpleado;
 
-class PropertyWidget extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-
-  const PropertyWidget({
-    required this.icon,
-    required this.label,
-    required this.color,
+  const EmployeeCard({
+    required this.nombre,
+    required this.edad,
+    required this.idEmpleado,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          const EdgeInsets.symmetric(vertical: 8.0), // Espacio entre elementos
-      child: Row(
-        children: [
-          Icon(icon, size: 25.0, color: color), // Icono con color personalizado
-          SizedBox(width: 15.0), // Espacio entre el ícono y el texto
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold, // Texto en negrita
-              color: Colors.white, // Color del texto (blanco para contrastar)
-            ),
+    return Container(
+      width: 300.0,
+      height: 150, // Ancho del Card (más estrecho)
+      child: Card(
+        elevation: 5.0, // Sombra
+        color: Colors.blue[50], // Color de fondo del Card (azul claro)
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0), // Bordes redondeados
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0), // Padding reducido
+          child: Row(
+            crossAxisAlignment:
+                CrossAxisAlignment.center, // Alinear ícono y texto
+            mainAxisSize:
+                MainAxisSize.min, // Ajusta el tamaño de la fila al contenido
+            children: [
+              // Ícono de empleado (más pequeño)
+              Icon(Icons.person, size: 40.0, color: Colors.blue),
+              SizedBox(width: 20.0),
+              // Espacio reducido entre el ícono y los atributos
+              // Columna con los atributos
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Nombre: $nombre',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87, // Color del texto
+                    ),
+                  ),
+                  SizedBox(height: 10.0), // Espacio reducido
+                  Text(
+                    'Edad: $edad años',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black87, // Color del texto
+                    ),
+                  ),
+                  SizedBox(height: 4.0), // Espacio reducido
+                  Text(
+                    'ID Empleado: $idEmpleado',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black87, // Color del texto
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
